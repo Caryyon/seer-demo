@@ -1,26 +1,19 @@
 import React from "react";
-import "./App.css";
-import SeerButton from "./components/Button";
+import { Navbar, Alignment, Button } from "@blueprintjs/core";
+import { PostsList } from "./components/PostList";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <SeerButton icon="refresh" large>
-          Test
-        </SeerButton>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar>
+        <Navbar.Group align={Alignment.LEFT}>
+          <Navbar.Heading>SEER</Navbar.Heading>
+          <Navbar.Divider />
+          <Button className="bp3-minimal" icon="home" text="Home" />
+          <Button className="bp3-minimal" icon="document" text="Files" />
+        </Navbar.Group>
+      </Navbar>
+      <PostsList />
     </div>
   );
 }

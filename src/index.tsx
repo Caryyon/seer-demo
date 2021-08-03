@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import configureAppStore from "./redux/configureAppStore";
 // a place to put top level inital paint styles
 // may not use this but following proper protocal for SC
 const GlobalStyle = createGlobalStyle``;
@@ -14,6 +14,9 @@ const GlobalStyle = createGlobalStyle``;
 // so that if we want to switch the theme based on the
 // state we are able to and it will trickle down throughout the app
 // accordingly.
+
+const store = configureAppStore();
+
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={{}}>
