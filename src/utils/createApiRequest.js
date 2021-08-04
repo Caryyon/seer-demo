@@ -1,10 +1,16 @@
 import axios from "axios";
-
+//import { getPosts } from "../redux/reducers/wallstreetbets";
 // sets the default baseURL so i don't have to in the options
 axios.defaults.baseURL = "https://dashboard.nbshare.io/api/v1";
 
-async function createApiRequest(options: object) {
+function AppThunk(dispatch) {
+  console.log("dispatch", dispatch);
+  console.log("AppThunk");
+}
+
+export default async function createApiRequest(options) {
   try {
+    console.log("options", options);
     // get jwt token from localStorage
     const token: string = localStorage.getItem("jwt") || null;
     // pass down the params to the function
@@ -12,11 +18,12 @@ async function createApiRequest(options: object) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      url: endpoint,
-      method: type,
-      data: options,
+      url: options.url,
+      method: options.method || "get",
+      data: options.data,
     });
-    return res;
+    console.log("res", res);
+    return AppThunk();
   } catch (e) {
     // handle this with a logger as well as a more meaning full
     // erro message but... ya know time constraints.

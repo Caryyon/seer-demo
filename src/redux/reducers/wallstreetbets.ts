@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import createApiRequest from "../../utils/createApiRequest";
 
 const initialState = [
   {
@@ -20,8 +21,9 @@ const postsSlice = createSlice({
   initialState,
   reducers: {
     getPosts(state, action) {
-      const data = createApiRequest(action.payload);
-      state.push(data);
+      console.log("action:", action);
+      createApiRequest(action.payload);
+      state.push([]);
     },
   },
 });
