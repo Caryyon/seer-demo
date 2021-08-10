@@ -22,7 +22,8 @@ const SongCard = styled(Card)`
   margin: 8px;
   color: ${({ theme }) => theme.primary};
   img {
-    height: 100%;
+    height: 100px;
+    width: auto;
   }
   div {
     text-align: right;

@@ -14,7 +14,7 @@ export default function Body() {
   return (
     <Wrapper>
       <h2>Welcome to Cary's Seer Demo</h2>
-      <p>I'd suggest going to check out the playist ☝️</p>
+      <p>I'd suggest going to check out the playlist ☝️</p>
     </Wrapper>
   );
 }
