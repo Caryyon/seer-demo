@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Login from "./components/Login";
 import styled from "styled-components";
 import { Navbar, Alignment, Button } from "@blueprintjs/core";
