@@ -38,9 +38,13 @@ const SongCard = styled(Card)`
   small {
     color: ${({ theme }) => theme.background};
   }
+  h3 {
+    margin: 0;
+  }
   img {
-    height: 100%;
-    width: auto;
+    margin: 8px;
+    height: auto;
+    width: 128px;
   }
   div {
     text-align: right;
@@ -59,7 +63,6 @@ export default function Playlist() {
     }
     getPlaylist();
   }, []);
-  console.log(list);
   if (list.length === 0) {
     return (
       <Loading>
