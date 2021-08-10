@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Card } from "@blueprintjs/core";
+import { Card, Spinner } from "@blueprintjs/core";
 import axios from "axios";
 
-const BASE_URL = "https://openwhyd.org/hot/electro?format=json";
+const BASE_URL = "https://openwhyd.org/hot?format=json";
 
 const Wrapper = styled.div`
   box-sizing: border-box;
   overflow: scroll;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   height: 95%;
   width: 100%;
+  color: ${({ theme }) => theme.primary};
 `;
 const SongCard = styled(Card)`
   box-sizing: border-box;
@@ -44,7 +47,14 @@ export default function Playlist() {
   }, []);
   console.log(list);
   if (list.length === 0) {
-    return <div>loading...</div>;
+    return (
+      <Wrapper>
+        <div>
+          <Spinner />
+          <p>Hold on while we get the playlist</p>
+        </div>
+      </Wrapper>
+    );
   }
   return (
     <Wrapper>
