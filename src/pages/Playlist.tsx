@@ -42,7 +42,7 @@ export default function Playlist() {
     getPlaylist();
   }, []);
   console.log(list);
-  if (list.length == 0) {
+  if (list.length === 0) {
     return <div>loading...</div>;
   }
   return (
