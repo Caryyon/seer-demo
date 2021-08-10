@@ -5,16 +5,25 @@ import axios from "axios";
 
 const BASE_URL = "https://openwhyd.org/hot?format=json";
 
+const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95%;
+  width: 100%;
+  color: ${({ theme }) => theme.primary};
+  p {
+    margin-top: 8px;
+  }
+`;
+
 const Wrapper = styled.div`
   box-sizing: border-box;
   overflow: scroll;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   height: 95%;
   width: 100%;
-  color: ${({ theme }) => theme.primary};
 `;
 const SongCard = styled(Card)`
   box-sizing: border-box;
@@ -48,12 +57,12 @@ export default function Playlist() {
   console.log(list);
   if (list.length === 0) {
     return (
-      <Wrapper>
+      <Loading>
         <div>
           <Spinner />
           <p>Hold on while we get the playlist</p>
         </div>
-      </Wrapper>
+      </Loading>
     );
   }
   return (
