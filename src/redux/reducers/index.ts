@@ -1,6 +1,4 @@
 import { combineReducers } from "redux";
-import wallstreetbets from "./wallstreetbets.ts";
+import playlist from "./playlist";
 
-export default combineReducers({
-  wallstreetbets,
-});
+export default combineReducers({ playlist });

@@ -1,21 +1,45 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import Login from "./components/Login";
+import styled from "styled-components";
 import { Navbar, Alignment, Button } from "@blueprintjs/core";
-import { PostsList } from "./components/PostList";
+import Header from "./components/Header";
+import Playlist from "./pages/Playlist";
+import Body from "./components/Body";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+const Wrapper = styled.div`
+  height: 100vh;
+  background-color: ${({ theme }: { theme: object }) => theme.background};
+`;
+
+const SeerNavbar = styled(Navbar)`
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.primary} !important;
+  button {
+    color: ${({ theme }) => theme.primary} !important;
+  }
+`;
 
 function App() {
-  return (
-    <div>
-      <Navbar>
-        <Navbar.Group align={Alignment.LEFT}>
-          <Navbar.Heading>SEER</Navbar.Heading>
-          <Navbar.Divider />
-          <Button className="bp3-minimal" icon="home" text="Home" />
-          <Button className="bp3-minimal" icon="document" text="Files" />
-        </Navbar.Group>
-      </Navbar>
-      <PostsList />
-    </div>
-  );
+  const [authed, setAuthed] = useState(false);
+  if (authed) {
+    return (
+      <Router>
+        <Wrapper>
+          <Header />
+          <Switch>
+            <Route path="/playlist">
+              <Playlist />
+            </Route>
+            <Route path="/">
+              <Body />
+            </Route>
+          </Switch>
+        </Wrapper>
+      </Router>
+    );
+  }
+  return <Login setAuthed={setAuthed} />;
 }
 
 export default App;
