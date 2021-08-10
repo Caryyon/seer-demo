@@ -1,6 +1,5 @@
 import styled, { keyframes } from "styled-components";
 const foreground = "#f7d794";
-const forehover = "#f5cd79";
 const background = "#303952";
 const raise = keyframes`
 0% {
@@ -19,23 +18,6 @@ const raise = keyframes`
   width: 80px;
   height: 16px;
   filter: blur(2px);
-}
-`;
-const show = keyframes`
-0% {
-  opacity: 0;
-  margin-top: -55px;
-}
-90% {
-  opacity: 0;
-  margin-top: -55px;
-}
-98% {
-  opacity: 0;
-}
-100% {
-  opacity: 1;
-  margin-top: 100px;
 }
 `;
 const openLid = keyframes`
@@ -73,16 +55,6 @@ const look = keyframes`
 100% {
   left: 20%;
 }
-`;
-
-const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: ${background};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
 `;
 
 const Wrapper = styled.div`

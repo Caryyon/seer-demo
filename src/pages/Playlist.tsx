@@ -11,8 +11,10 @@ export default function Playlist() {
         baseURL: BASE_URL,
       });
       console.log(data);
+      setList([]);
     }
     getPlaylist();
   }, []);
+  console.log(list);
   return <div>playlist</div>;
 }
