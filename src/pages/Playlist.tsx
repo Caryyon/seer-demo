@@ -26,15 +26,20 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 const SongCard = styled(Card)`
+  padding: 0;
   box-sizing: border-box;
   flex: 1;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: ${({ theme }) => theme.secondary};
   margin: 8px;
   color: ${({ theme }) => theme.primary};
+  small {
+    color: ${({ theme }) => theme.background};
+  }
   img {
-    height: 100px;
+    height: 100%;
     width: auto;
   }
   div {
@@ -73,10 +78,10 @@ export default function Playlist() {
             <img src={img} alt={name} />
             <div>
               <div>
-                <h4>
+                <h3>
                   <small>Song Name: </small>
                   {name}
-                </h4>
+                </h3>
               </div>
               <div>
                 <p>
@@ -85,7 +90,7 @@ export default function Playlist() {
                 </p>
                 <p>
                   <small>Prev Score: </small>
-                  {prev}
+                  {prev ? prev : "none"}
                 </p>
               </div>
             </div>
