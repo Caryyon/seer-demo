@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const Wrapper = styled.div`
   height: 100vh;
-  background-color: ${({ theme }: { theme: object }) => theme.background};
+  background-color: ${({ theme }) => theme.background};
 `;
 
 const SeerNavbar = styled(Navbar)`
