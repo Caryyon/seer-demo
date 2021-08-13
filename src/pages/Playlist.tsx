@@ -28,13 +28,13 @@ const Wrapper = styled.div`
 const SongCard = styled(Card)`
   padding: 0;
   box-sizing: border-box;
-  flex: 1;
+  width: auto;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row-reverse;
+  justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.secondary};
   margin: 8px;
-  color: ${({ theme }) => theme.primary};
+  color: white;
   small {
     color: ${({ theme }) => theme.background};
   }
