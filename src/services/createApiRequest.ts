@@ -1,17 +1,17 @@
 import axios from "axios";
+import { Dispatch } from "redux";
+import { req, res, err } from "../redux/reducers/list";
 
 // setting defaults
-axios.defaults.baseURL = "https://openwhyd.org/hot";
-axios.defaults.params = { format: "json" };
+axios.defaults.baseURL = "https://api.nomics.com/v1";
 
-export default async function createApiRequest(options: object) {
-  try {
-    const data = await axios({ ...options });
-    console.log(data);
-    return () => {
-      console.log("createApiRequest");
-    };
-  } catch (e) {
-    console.error(e);
-  }
+export default function createApiRequest(options: object) {
+  return function (dispatch: Dispatch) {
+    //sets loading screen
+    dispatch(req());
+    return axios({ ...options }).then(
+      ({ data }: { data: object[] }) => dispatch(res(data)),
+      (error: string) => dispatch(err(error))
+    );
+  };
 }

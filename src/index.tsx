@@ -22,15 +22,22 @@ const GlobalStyle = createGlobalStyle`
 // state we are able to and it will trickle down throughout the app
 // accordingly.
 
-const theme = {
-  background: "#303952",
-  primary: "#f7d794",
-  secondary: "#786fa6",
+const lightTheme = {
+  background: "#193BC9",
+  white: "#FBFBFB",
+  primary: "#FBFBFB",
+  secondary: "#E0DBE4",
+};
+const darkTheme = {
+  background: "#e74c3c",
+  white: "#34495e",
+  primary: "#FBFBFB",
+  secondary: "#E0DBE4",
 };
 
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={darkTheme}>
       <GlobalStyle />
       <React.StrictMode>
         <App />

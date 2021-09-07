@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
-const foreground = "#f7d794";
-const background = "#303952";
+const foreground = "#FBFBFB";
+const background = "#193BC9";
 const raise = keyframes`
 0% {
   margin-top: -30px;
