@@ -18,20 +18,33 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+  a {
+    text-align: center;
+    color: ${({ theme }: { theme: { background: string } }) =>
+      theme.background};
+  }
 `;
 
 const Card = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border: 1px solid
     ${({ theme }: { theme: { secondary: string } }) => theme.secondary};
   width: 96%;
   padding: 16px;
   margin: 8px;
+  div {
+    display: flex;
+    align-items: center;
+  }
   img {
     ${size("75px", "75px")}
     margin-right: 16px;
+    @media (max-width: 768px) {
+      ${size("50px", "50px")}
+    }
   }
   h3 {
     color: ${({ theme }: { theme: { background: string } }) =>
@@ -40,42 +53,83 @@ const Card = styled.div`
   }
 `;
 
+const ErrorState = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }: { theme: { background: string } }) => theme.background};
+`;
+
 export default function Body() {
   const [page] = useState(1);
   const dispatch = useAppDispatch();
   const { loading, data, error } = useAppSelector((state) => state.list);
+  console.log(data);
   useEffect(() => {
     requestCryptoData({
       dispatch,
       url: "/currencies/ticker",
       params: {
-        key: "92ea800cb44c02ae424198cf401b301e06a116bc",
         "per-page": 15,
         page,
       },
     });
   }, [page, dispatch]);
+
   if (loading) {
-    return <SeerLogo />;
+    return (
+      <Wrapper style={{ justifyContent: "center" }}>
+        <SeerLogo />
+      </Wrapper>
+    );
   }
+
   if (error) {
-    return <div>There was an error</div>;
+    return (
+      <ErrorState>
+        <code>
+          {/* @ts-ignore */}
+          {error.message || "There was an error processing your request"}
+        </code>
+        <a href="https://nomics.com/">
+          Crypto Market Cap & Pricing Data Provided By Nomics
+        </a>
+      </ErrorState>
+    );
   }
+
   return (
     <Wrapper>
-      {/* @ts-ignore */}
-      {data.map(({ id, logo_url, rank }) => {
-        return (
-          <Card key={id}>
-            <img src={logo_url} alt={`${id} logo`} />
-            <code>
-              <h3>id: {id}</h3>
-              <p>rank: {rank}</p>
-            </code>
-            <div></div>
-          </Card>
-        );
-      })}
+      {data.map(
+        /* @ts-ignore */
+        ({ id, logo_url, rank, name, currency, status, price, high }) => {
+          return (
+            <Card key={id}>
+              <div>
+                <img src={logo_url} alt={`${id} logo`} />
+                <code>
+                  <h3>Name: {name}</h3>
+                  <p>Rank: {rank}</p>
+                  <p>Token: {currency}</p>
+                </code>
+              </div>
+              <div>
+                <code>
+                  <p>Status: {status}</p>
+                  <p>Price: ${parseInt(price).toFixed(0)}</p>
+                  <p>High: ${parseInt(high).toFixed(0)}</p>
+                </code>
+              </div>
+            </Card>
+          );
+        }
+      )}
+      <a href="https://nomics.com/">
+        Crypto Market Cap & Pricing Data Provided By Nomics
+      </a>
     </Wrapper>
   );
 }

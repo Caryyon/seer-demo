@@ -4,8 +4,9 @@ import { req, res, err } from "../redux/reducers/list";
 
 // setting defaults
 axios.defaults.baseURL = "https://api.nomics.com/v1";
-axios.defaults.headers = {
-  "Access-Control-Allow-Origin": "https://seer-demo.vercel.app/*",
+// would come from localStorage
+axios.defaults.params = {
+  key: "92ea800cb44c02ae424198cf401b301e06a116bc",
 };
 
 export default function createApiRequest(options: object) {

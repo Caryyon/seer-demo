@@ -6,8 +6,9 @@ import styled, { css } from "styled-components";
 //
 // this allows me to modify the attributes as well as the styles
 // based on the props
-const SeerButton = styled(Button).attrs((props) => ({}))`
-  //
-  ${(props) => css``}
+const SeerButton = styled(Button)`
+  ${(props) => css`
+    background: transparent !important;
+  `}
 `;
 export default SeerButton;
