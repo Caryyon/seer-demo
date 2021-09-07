@@ -22,12 +22,12 @@ const GlobalStyle = createGlobalStyle`
 // state we are able to and it will trickle down throughout the app
 // accordingly.
 
-const lightTheme = {
-  background: "#193BC9",
-  white: "#FBFBFB",
-  primary: "#FBFBFB",
-  secondary: "#E0DBE4",
-};
+//const lightTheme = {
+//background: "#193BC9",
+//white: "#FBFBFB",
+//primary: "#FBFBFB",
+//secondary: "#E0DBE4",
+//};
 const darkTheme = {
   background: "#e74c3c",
   white: "#34495e",

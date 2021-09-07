@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Navbar, Alignment, Button } from "@blueprintjs/core";
+import { Navbar, Alignment } from "@blueprintjs/core";
 import { Link } from "react-router-dom";
 
 const SeerNavbar = styled(Navbar)`

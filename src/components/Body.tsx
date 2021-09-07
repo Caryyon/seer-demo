@@ -41,7 +41,7 @@ const Card = styled.div`
 `;
 
 export default function Body() {
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   const dispatch = useAppDispatch();
   const { loading, data, error } = useAppSelector((state) => state.list);
   useEffect(() => {
