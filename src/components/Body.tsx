@@ -4,6 +4,7 @@ import { size } from "polished";
 import { requestCryptoData } from "../redux/requestCryptoData";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import SeerLogo from "./SeerLogo";
+import { DataType } from "../redux/reducers/list";
 
 const Wrapper = styled.div`
   display: flex;
@@ -80,7 +81,7 @@ export default function Body() {
   const [page] = useState(1);
   const dispatch = useAppDispatch();
   const { loading, data, error } = useAppSelector(
-    (state: { list: { loading: boolean; data: object[]; error: string } }) =>
+    (state: { list: { loading: boolean; data: [DataType]; error: string } }) =>
       state.list
   );
   useEffect(() => {
@@ -102,13 +103,10 @@ export default function Body() {
     );
   }
 
-  if (error) {
+  if (!error) {
     return (
       <ErrorState>
-        <code>
-          {/* @ts-ignore */}
-          {error.message || "There was an error processing your request"}
-        </code>
+        <code>{error || "There was an error processing your request"}</code>
         <a href="https://nomics.com/">
           Crypto Market Cap & Pricing Data Provided By Nomics
         </a>
@@ -120,17 +118,16 @@ export default function Body() {
     <Wrapper>
       {data.map(
         ({
-          // @ts-ignore
-          id /* @ts-ignore */,
-          logo_url /* @ts-ignore */,
-          rank /* @ts-ignore */,
-          name /* @ts-ignore */,
-          currency /* @ts-ignore */,
-          status /* @ts-ignore */,
-          price /* @ts-ignore */,
-          high /* @ts-ignore */,
-          market_cap /* @ts-ignore */,
-          max_supply /* @ts-ignore */,
+          id,
+          logo_url,
+          rank,
+          name,
+          currency,
+          status,
+          price,
+          high,
+          market_cap,
+          max_supply,
           num_exchanges,
         }) => {
           return (
@@ -146,7 +143,7 @@ export default function Body() {
               <div>
                 <code>
                   <p>Market Cap: {market_cap}</p>
-                  <p>Max Supply: {max_supply}</p>
+                  <p>Max Supply: {parseInt(max_supply).toFixed(0)}</p>
                   <p>Listed Exchanges: {num_exchanges}</p>
                 </code>
               </div>

@@ -2,7 +2,7 @@ import axios from "axios";
 import { AnyAction, Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../redux/store";
-import { req, res, err } from "../redux/reducers/list";
+import { req, res, err, DataType } from "../redux/reducers/list";
 
 // setting defaults
 axios.defaults.baseURL = "https://api.nomics.com/v1";
@@ -23,8 +23,8 @@ export default function createApiRequest(options: object) {
     //sets loading screen
     dispatch(req());
     return axios({ ...options }).then(
-      ({ data }: { data: object[] }) => dispatch(res(data)),
-      (error: string) => dispatch(err(error))
+      ({ data }: { data: [DataType] }) => dispatch(res(data)),
+      (error: { message: string }) => dispatch(err(error.message))
     );
   };
 }
