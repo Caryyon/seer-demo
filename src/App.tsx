@@ -1,8 +1,21 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Body from "./components/Body";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useAppSelector } from "./hooks";
+
+// a place to put top level inital paint styles
+// may not use this but following proper protocal for SC
+const GlobalStyle = createGlobalStyle`
+  html, body {
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+  }
+`;
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -12,18 +25,39 @@ const Wrapper = styled.div`
   box-sizing: border-box;
 `;
 
+const lightTheme = {
+  background: "#193BC9",
+  white: "#FBFBFB",
+  primary: "#FBFBFB",
+  secondary: "#95a5a6",
+};
+const darkTheme = {
+  background: "#e74c3c",
+  white: "#34495e",
+  primary: "#FBFBFB",
+  secondary: "#ecf0f1",
+};
+
 function App() {
+  const { theme } = useAppSelector(
+    (state: { theme: { theme: boolean } }) => state.theme
+  );
   return (
-    <Router>
-      <Wrapper>
-        <Header />
-        <Switch>
-          <Route path="/">
-            <Body />
-          </Route>
-        </Switch>
-      </Wrapper>
-    </Router>
+    <ThemeProvider theme={theme ? lightTheme : darkTheme}>
+      <GlobalStyle />
+      <React.StrictMode>
+        <Router>
+          <Wrapper>
+            <Header />
+            <Switch>
+              <Route path="/">
+                <Body />
+              </Route>
+            </Switch>
+          </Wrapper>
+        </Router>
+      </React.StrictMode>
+    </ThemeProvider>
   );
 }
 

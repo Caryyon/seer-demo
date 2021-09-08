@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
-const foreground = "#FBFBFB";
-const background = "#193BC9";
+import { lighten } from "polished";
+const foreground = "#ecf0f1";
 const raise = keyframes`
 0% {
   margin-top: -30px;
@@ -79,11 +79,11 @@ const TriangleDown = styled.div`
   border-top: 20px solid ${foreground};
 `;
 const Eye = styled.div`
-  border: 3px solid ${background};
+  border: 3px solid ${({ theme }) => theme.background};
   overflow: hidden;
   position: relative;
   top: -60px;
-  background-color: #786fa6;
+  background-color: ${({ theme }) => lighten(0.2, theme.background)};
   border-radius: 50%;
   width: 35px;
   height: 35px;
@@ -92,7 +92,7 @@ const Eye = styled.div`
 `;
 const Lid = styled.div`
   position: relative;
-  border-bottom: 3px solid ${background};
+  border-bottom: 3px solid ${({ theme }) => theme.background};
   top: 0;
   width: 100%;
   height: 15px;
@@ -107,7 +107,7 @@ const Pupil = styled.div`
   left: 20%;
   width: 60%;
   height: 60%;
-  background-color: ${background};
+  background-color: ${({ theme }) => theme.background};
   z-index: 1;
   animation: ${look} 5s ease-in-out;
   animation-delay: 3s;

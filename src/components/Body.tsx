@@ -37,13 +37,26 @@ const Card = styled.div`
   margin: 8px;
   div {
     display: flex;
+    flex: 1;
     align-items: center;
+    &:nth-child(2) {
+      justify-content: center;
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+    &:nth-child(3) {
+      justify-content: flex-end;
+      @media (max-width: 768px) {
+        text-align: right;
+      }
+    }
   }
   img {
     ${size("75px", "75px")}
     margin-right: 16px;
     @media (max-width: 768px) {
-      ${size("50px", "50px")}
+      ${size("25px", "25px")}
     }
   }
   h3 {
@@ -66,8 +79,10 @@ const ErrorState = styled.div`
 export default function Body() {
   const [page] = useState(1);
   const dispatch = useAppDispatch();
-  const { loading, data, error } = useAppSelector((state) => state.list);
-  console.log(data);
+  const { loading, data, error } = useAppSelector(
+    (state: { list: { loading: boolean; data: object[]; error: string } }) =>
+      state.list
+  );
   useEffect(() => {
     requestCryptoData({
       dispatch,
@@ -104,8 +119,20 @@ export default function Body() {
   return (
     <Wrapper>
       {data.map(
-        /* @ts-ignore */
-        ({ id, logo_url, rank, name, currency, status, price, high }) => {
+        ({
+          // @ts-ignore
+          id /* @ts-ignore */,
+          logo_url /* @ts-ignore */,
+          rank /* @ts-ignore */,
+          name /* @ts-ignore */,
+          currency /* @ts-ignore */,
+          status /* @ts-ignore */,
+          price /* @ts-ignore */,
+          high /* @ts-ignore */,
+          market_cap /* @ts-ignore */,
+          max_supply /* @ts-ignore */,
+          num_exchanges,
+        }) => {
           return (
             <Card key={id}>
               <div>
@@ -114,6 +141,13 @@ export default function Body() {
                   <h3>Name: {name}</h3>
                   <p>Rank: {rank}</p>
                   <p>Token: {currency}</p>
+                </code>
+              </div>
+              <div>
+                <code>
+                  <p>Market Cap: {market_cap}</p>
+                  <p>Max Supply: {max_supply}</p>
+                  <p>Listed Exchanges: {num_exchanges}</p>
                 </code>
               </div>
               <div>
