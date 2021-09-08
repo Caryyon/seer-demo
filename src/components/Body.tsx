@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { size } from "polished";
+import { Icon } from "@blueprintjs/core";
 import { requestCryptoData } from "../redux/requestCryptoData";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import SeerLogo from "./SeerLogo";
@@ -75,6 +76,13 @@ const ErrorState = styled.div`
   align-items: center;
   justify-content: center;
   color: ${({ theme }: { theme: { background: string } }) => theme.background};
+  span {
+    margin-bottom: 32px;
+  }
+  a {
+    margin-top: 16px;
+    color: ${({ theme }: { theme: { secondary: string } }) => theme.secondary};
+  }
 `;
 
 export default function Body() {
@@ -103,9 +111,10 @@ export default function Body() {
     );
   }
 
-  if (!error) {
+  if (error) {
     return (
       <ErrorState>
+        <Icon size={100} icon="error" />
         <code>{error || "There was an error processing your request"}</code>
         <a href="https://nomics.com/">
           Crypto Market Cap & Pricing Data Provided By Nomics
@@ -129,7 +138,7 @@ export default function Body() {
           market_cap,
           max_supply,
           num_exchanges,
-        }) => {
+        }: DataType) => {
           return (
             <Card key={id}>
               <div>
@@ -143,7 +152,7 @@ export default function Body() {
               <div>
                 <code>
                   <p>Market Cap: {market_cap}</p>
-                  <p>Max Supply: {parseInt(max_supply).toFixed(0)}</p>
+                  <p>Max Supply: {max_supply || "∞"}</p>
                   <p>Listed Exchanges: {num_exchanges}</p>
                 </code>
               </div>
