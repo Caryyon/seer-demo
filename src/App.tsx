@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
